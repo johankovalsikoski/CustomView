@@ -26,13 +26,13 @@ class DoubleTexView @JvmOverloads constructor(
     init {
         LayoutInflater.from(context).inflate(R.layout.widget_double_textview, this)
 
-        if (attrs != null) {
-            val styleable = context.obtainStyledAttributes(attrs, R.styleable.DoubleTexView)
-
-            textViewTitle.text = styleable.getString(R.styleable.DoubleTexView_titleText)
-            textViewSubtitle.text = styleable.getString(R.styleable.DoubleTexView_subtitleText)
-
-            styleable.recycle()
+        context.obtainStyledAttributes(attrs, R.styleable.DoubleTexView).apply {
+            try {
+                textViewTitle.text = this.getString(R.styleable.DoubleTexView_titleText)
+                textViewSubtitle.text = this.getString(R.styleable.DoubleTexView_subtitleText)
+            } finally {
+                this.recycle()
+            }
         }
 
     }
